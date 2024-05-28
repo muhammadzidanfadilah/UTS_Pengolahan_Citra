@@ -1,9 +1,8 @@
 # UTS PENGOLAHAN CITRA 
-# APLIKASI MANIPULASI GAMBAR CITRA
-
+# APLIKASI MANIPULASI GAMBAR CITRAa
 
 ```
-NAMA ANGGOTA KELOMPOK:
+NAMA ANGGOTA KELOMPOK
 Abiyanfaras Danuyasa    | 312210103
 Birrham Efendi Lubis    | 312210272
 Muhammad Zidan Fadillah | 312210277
@@ -12,8 +11,8 @@ Kelas : TI.22.A2
 Mata Kuliah : Pengolahan Citra
 ```
 
-# LINK PDF TUTORIAL PENGGUNAAN APLIKASI
-[Tutorial penggunaan Aplikasi Manipulasi  Gambar Citra_.pdf](https://github.com/muhammadzidanfadilah/UTS_Pengolahan_Citra/files/15468200/Tutorial.penggunaan.Aplikasi.Manipulasi.Gambar.Citra_.pdf)
+# LINK PDF TUTORIAL ATAU CARA MENGGUNAKAN APLIKASI MANIPULASI GAMBAR CITRA
+[Tutorial atau cara menggunakan Aplikasi Manipulasi Gambar Citra-.pdf](https://github.com/AbiyanfarasDanuyasa/UTS_Pengolahan_Citra/files/15474851/Tutorial.atau.cara.menggunakan.Aplikasi.Manipulasi.Gambar.Citra-.pdf)
 
 
 # Meng import library yang akan di gunakan 
@@ -59,13 +58,13 @@ def set_theme():
 ```
 # konversi ke RGB Ke HSV
 ```
-def convert_to_hsv(image):
+def RGB menjadi HSV(image):
     hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     return hsv_image
 ```
 # Menghitung dan juga Menampilkan HISTOGRAM
 ```
-def compute_histogram(image):
+def Menghitung histogram(image):
     colors = ('b', 'g', 'r')
     fig, ax = plt.subplots(figsize=(6, 4))
     for i, col in enumerate(colors):
@@ -79,32 +78,20 @@ def compute_histogram(image):
 ```
 # Mengatur sesuai keinginan pada BRIGHTNESS DAN CONTRAS
 ```
-def adjust_brightness_contrast(image, brightness, contrast):
+def mengatur_brignest_contras(image, brignest, contras):
     adjusted = cv2.convertScaleAbs(image, alpha=contrast/127.0, beta=brightness)
     return adjusted
 ```
 # Mendeteksi CONTOURS
 ```
-def find_contours(image):
+def menemukan contours(image):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
     edged = cv2.Canny(blurred, 50, 150)
     contours, _ = cv2.findContours(edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     return contours
 ```
-# Menampilkan SEGMENTASI
-```
-def segment_image_kmeans(image, k):
-    image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    pixel_values = image_rgb.reshape((-1, 3))
-    pixel_values = np.float32(pixel_values)
-    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.2)
-    _, labels, centers = cv2.kmeans(pixel_values, k, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
-    centers = np.uint8(centers)
-    segmented_image = centers[labels.flatten()]
-    segmented_image = segmented_image.reshape(image.shape)
-    return segmented_image
-```
+
 # Desain interface pada streamlit
 ```
 def main():
@@ -126,35 +113,29 @@ def main():
         file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
         image = cv2.imdecode(file_bytes, 1)
 
-        st.subheader('Original Image')
+        st.subheader('Gambar Asli')
         st.image(image, channels="BGR", use_column_width=True)
 
-        if st.button('Convert to HSV'):
+        if st.button('RGB menjadi HSV'):
             hsv_image = convert_to_hsv(image)
             st.subheader('HSV Image')
             st.image(hsv_image, channels="HSV", use_column_width=True)
 
-        if st.button('Compute Histogram'):
+        if st.button('Menghitung Histogram'):
             st.subheader('Histogram')
             compute_histogram(image)
 
-        st.subheader('Adjust Brightness and Contrast')
+        st.subheader('mengatur Brignest and Contras')
         brightness = st.slider('Brightness', -100, 100, 0)
         contrast = st.slider('Contrast', -100, 100, 0)
         adjusted_image = adjust_brightness_contrast(image, brightness, contrast)
         st.image(adjusted_image, channels="BGR", use_column_width=True)
 
-        if st.button('Find Contours'):
+        if st.button('menemukan Contours'):
             contours = find_contours(image)
             st.subheader('Contours')
             image_with_contours = cv2.drawContours(image.copy(), contours, -1, (0, 255, 0), 2)
             st.image(image_with_contours, channels="BGR", use_column_width=True)
-        
-        st.subheader('Segmentasi')
-        k = st.slider('Number of clusters (k)', 2, 10, 4)
-        if st.button('Segment Image'):
-            segmented_image = segment_image_kmeans(image, k)
-            st.image(segmented_image, caption='Segmented Image', use_column_width=True)
 
 if _name_ == '_main_':
     main()
@@ -163,40 +144,43 @@ if _name_ == '_main_':
 # Hasil
 
 # Upload gambar
-![image](https://github.com/AbiyanfarasDanuyasa/UTS_pengolahan_citra/assets/115553474/d5378e97-3bdd-494e-ba5b-43576c6ec2e2)
+![image](https://github.com/AbiyanfarasDanuyasa/UTS_Pengolahan_Citra/assets/115553474/bbbc469f-8244-489b-bbc2-87283d7f322d)
 
 
 
 
 # Sudah di upload
-![image](https://github.com/AbiyanfarasDanuyasa/UTS_pengolahan_citra/assets/115553474/f03b9621-377f-4f09-ac51-4de070ce5c31)
+![image](https://github.com/AbiyanfarasDanuyasa/UTS_Pengolahan_Citra/assets/115553474/c99d70ad-2a3c-4bd5-b350-1c7d3d20a314)
 
 
 
 # HSV
-![image](https://github.com/AbiyanfarasDanuyasa/UTS_pengolahan_citra/assets/115553474/a21c8701-f31e-48f1-abd3-78fa16a93d4d)
 
+![image](https://github.com/AbiyanfarasDanuyasa/UTS_Pengolahan_Citra/assets/115553474/4a91ae58-0acc-4de4-a078-ac7f10364c57)
 
 
 
 # HISTOGRAM
-![image](https://github.com/AbiyanfarasDanuyasa/UTS_pengolahan_citra/assets/115553474/bd408a17-b3e4-4a8d-9075-af8b9c6e7892)
+
+![image](https://github.com/AbiyanfarasDanuyasa/UTS_Pengolahan_Citra/assets/115553474/f556dd43-373b-4a17-92f2-3e33ae32a0d1)
+
+
+
+# BRIGNEST DAN CONTRAS
+
+![image](https://github.com/AbiyanfarasDanuyasa/UTS_Pengolahan_Citra/assets/115553474/83544348-ebfb-4707-a594-77fefa411c69)
+
+
+# CONTOUR
+![image](https://github.com/AbiyanfarasDanuyasa/UTS_Pengolahan_Citra/assets/115553474/8bb68dad-7d65-49f8-b606-bf9837ae2f01)
 
 
 
 
-# BRIGHTNESS DAN CONTRAS
-![image](https://github.com/AbiyanfarasDanuyasa/UTS_pengolahan_citra/assets/115553474/0f73185f-afe2-440a-81c8-9ad8b2eb5dbc)
-
-
-
-# CONTOURS
-![image](https://github.com/AbiyanfarasDanuyasa/UTS_pengolahan_citra/assets/115553474/8a42f292-285a-46a6-9882-753daa111775)
 
 
 
 
-# SEGMENTASI
-![image](https://github.com/AbiyanfarasDanuyasa/UTS_pengolahan_citra/assets/115553474/d9226615-f988-4b22-b844-36b91a0077e7)
+
 
 
