@@ -3,9 +3,9 @@
 
 ```
 NAMA ANGGOTA KELOMPOK:
-Abiyanfaras Danuyasa    | (312210103)
-Birrham Efendi Lubis    | (312210272)
-Muhammad Zidan Fadillah | (312210277)
+Abiyanfaras Danuyasa    | 312210103
+Birrham Efendi Lubis    | 312210272
+Muhammad Zidan Fadillah | 312210277
 
 Kelas : TI.22.A2
 Mata Kuliah : Pengolahan Citra
